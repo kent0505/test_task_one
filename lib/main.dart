@@ -6,7 +6,7 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'core/config/router.dart';
 import 'core/config/themes.dart';
 import 'features/home/bloc/home_bloc.dart';
-import 'features/notes/bloc/note_bloc.dart';
+import 'features/note/bloc/note_bloc.dart';
 
 void main() async {
   await Hive.initFlutter();

@@ -2,8 +2,8 @@ import 'package:go_router/go_router.dart';
 
 import '../../features/splash/splash_page.dart';
 import '../../features/home/home_page.dart';
-import '../../features/notes/pages/note_add_page.dart';
-import '../../features/notes/pages/note_edit_page.dart';
+import '../../features/note/pages/note_add_page.dart';
+import '../../features/note/pages/note_edit_page.dart';
 import '../models/note.dart';
 
 final routerConfig = GoRouter(

@@ -6,7 +6,7 @@ import '../../core/config/app_colors.dart';
 import '../../core/widgets/actions/custom_appbar.dart';
 import '../../core/widgets/buttons/ico_button.dart';
 import '../../core/widgets/listview/custom_listview.dart';
-import '../notes/bloc/note_bloc.dart';
+import '../note/bloc/note_bloc.dart';
 import 'bloc/home_bloc.dart';
 import 'drawer/drawer_widget.dart';
 import 'drawer/end_drawer_widget.dart';

@@ -4,7 +4,7 @@ import 'package:go_router/go_router.dart';
 
 import '../../core/utils.dart';
 import '../../core/widgets/actions/loading_widget.dart';
-import '../notes/bloc/note_bloc.dart';
+import '../note/bloc/note_bloc.dart';
 
 class SplashPage extends StatefulWidget {
   const SplashPage({super.key});
@@ -14,7 +14,7 @@ class SplashPage extends StatefulWidget {
 }
 
 class _SplashPageState extends State<SplashPage> {
-  Future _load() async {
+  void _load() async {
     await getData().then((_) {
       context.read<NoteBloc>().add(GetNotesEvent());
     });

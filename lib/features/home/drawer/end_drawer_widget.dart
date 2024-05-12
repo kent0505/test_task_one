@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/utils.dart';
-import '../../notes/bloc/note_bloc.dart';
+import '../../note/bloc/note_bloc.dart';
 
 class EndDrawerWidget extends StatelessWidget {
   const EndDrawerWidget({super.key});

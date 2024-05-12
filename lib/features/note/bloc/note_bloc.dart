@@ -9,16 +9,16 @@ part 'note_state.dart';
 
 class NoteBloc extends Bloc<NoteEvent, NoteState> {
   final _service = NoteService();
-  List<Note> notes = [];
+  List<Note> _notes = [];
 
   NoteBloc() : super(NoteInitial()) {
     // GET NOTES
     on<GetNotesEvent>((event, emit) async {
       if (_service.notes.isEmpty) {
-        notes = await _service.getNotes();
-        emit(NotesLoadedState(notes: notes));
+        _notes = await _service.getNotes();
+        emit(NotesLoadedState(notes: _notes));
       } else {
-        emit(NotesLoadedState(notes: notes));
+        emit(NotesLoadedState(notes: _notes));
       }
     });
 
@@ -26,8 +26,8 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
     on<AddNoteEvent>((event, emit) async {
       if (event.note.title.isNotEmpty || event.note.description.isNotEmpty) {
         _service.notes.add(event.note);
-        notes = await _service.updateNotes();
-        emit(NotesLoadedState(notes: notes));
+        _notes = await _service.updateNotes();
+        emit(NotesLoadedState(notes: _notes));
       }
     });
 
@@ -40,15 +40,15 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
           note.pinned = event.note.pinned;
         }
       }
-      notes = await _service.updateNotes();
-      emit(NotesLoadedState(notes: notes));
+      _notes = await _service.updateNotes();
+      emit(NotesLoadedState(notes: _notes));
     });
 
     // DELETE NOTE
     on<DeleteNoteEvent>((event, emit) async {
       _service.notes.removeWhere((element) => element.id == event.id);
-      notes = await _service.updateNotes();
-      emit(NotesLoadedState(notes: notes));
+      _notes = await _service.updateNotes();
+      emit(NotesLoadedState(notes: _notes));
     });
 
     // SORT NOTES
@@ -58,7 +58,7 @@ class NoteBloc extends Bloc<NoteEvent, NoteState> {
       }
       await saveBool('newFirst', event.newFirst);
       newFirst = event.newFirst;
-      emit(NotesLoadedState(notes: notes));
+      emit(NotesLoadedState(notes: _notes));
     });
 
     // SEARCH NOTES

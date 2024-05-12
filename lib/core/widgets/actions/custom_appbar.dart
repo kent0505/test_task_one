@@ -4,7 +4,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../features/home/bloc/home_bloc.dart';
-import '../../../features/notes/bloc/note_bloc.dart';
+import '../../../features/note/bloc/note_bloc.dart';
 import '../../config/app_colors.dart';
 import '../buttons/ico_button.dart';
 
