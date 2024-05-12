@@ -7,9 +7,11 @@ import '../../../core/models/note.dart';
 import '../../../core/utils.dart';
 import '../../../core/widgets/actions/custom_appbar.dart';
 import '../../../core/widgets/buttons/ico_button.dart';
+import '../../../core/widgets/listview/custom_listview.dart';
 import '../../../core/widgets/textfields/title_field.dart';
 import '../../../core/widgets/textfields/txt_field.dart';
 import '../bloc/note_bloc.dart';
+import '../widgets/date_and_time.dart';
 
 class NoteAddPage extends StatefulWidget {
   const NoteAddPage({super.key});
@@ -63,16 +65,15 @@ class _NoteAddPageState extends State<NoteAddPage> {
               ),
             ],
           ),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: [
-                const SizedBox(height: 20),
-                TitleField(controller: controller1),
-                TxtField(controller: controller2),
-                const SizedBox(height: 60),
-              ],
-            ),
+          CustomListView(
+            children: [
+              const SizedBox(height: 20),
+              const DateAndTime(),
+              const SizedBox(height: 20),
+              TitleField(controller: controller1),
+              TxtField(controller: controller2),
+              const SizedBox(height: 60),
+            ],
           ),
         ],
       ),

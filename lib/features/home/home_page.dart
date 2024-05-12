@@ -3,15 +3,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../core/config/app_colors.dart';
-import '../../core/utils.dart';
 import '../../core/widgets/actions/custom_appbar.dart';
 import '../../core/widgets/buttons/ico_button.dart';
+import '../../core/widgets/listview/custom_listview.dart';
 import '../notes/bloc/note_bloc.dart';
-
 import 'bloc/home_bloc.dart';
 import 'drawer/drawer_widget.dart';
 import 'drawer/end_drawer_widget.dart';
-import 'widgets/note_card.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -62,21 +60,7 @@ class HomePage extends StatelessWidget {
                     );
                   }
 
-                  return ListView.builder(
-                    padding: const EdgeInsets.all(12),
-                    itemCount: state.notes.length,
-                    itemBuilder: (context, index) {
-                      return NoteCard(
-                        note: sortNotes(state.notes)[index],
-                        onPressed: () {
-                          context.push(
-                            '/note_edit',
-                            extra: sortNotes(state.notes)[index],
-                          );
-                        },
-                      );
-                    },
-                  );
+                  return CustomListView(notes: state.notes);
                 }
 
                 return Container();

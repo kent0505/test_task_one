@@ -33,16 +33,7 @@ class MyApp extends StatelessWidget {
         theme: theme,
         locale: const Locale('ru', 'RU'),
         routerConfig: routerConfig,
-        scrollBehavior: const ScrollBehaviorModified(),
       ),
     );
-  }
-}
-
-class ScrollBehaviorModified extends ScrollBehavior {
-  const ScrollBehaviorModified();
-  @override
-  ScrollPhysics getScrollPhysics(BuildContext context) {
-    return const BouncingScrollPhysics();
   }
 }

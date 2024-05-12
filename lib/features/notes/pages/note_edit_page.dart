@@ -4,13 +4,14 @@ import 'package:go_router/go_router.dart';
 
 import '../../../core/config/app_colors.dart';
 import '../../../core/models/note.dart';
-import '../../../core/utils.dart';
 import '../../../core/widgets/actions/custom_appbar.dart';
 import '../../../core/widgets/actions/dialog_widget.dart';
 import '../../../core/widgets/buttons/ico_button.dart';
+import '../../../core/widgets/listview/custom_listview.dart';
 import '../../../core/widgets/textfields/title_field.dart';
 import '../../../core/widgets/textfields/txt_field.dart';
 import '../bloc/note_bloc.dart';
+import '../widgets/date_and_time.dart';
 
 class NoteEditPage extends StatefulWidget {
   const NoteEditPage({super.key, required this.note});
@@ -35,6 +36,19 @@ class _NoteEditPageState extends State<NoteEditPage> {
   void onDelete() {
     context.read<NoteBloc>().add(DeleteNoteEvent(id: widget.note.id));
     context.pop();
+  }
+
+  void onDeleteDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return DialogWidget(
+          title: 'Удалить заметку?',
+          yesText: 'УДАЛИТЬ',
+          onPressed: onDelete,
+        );
+      },
+    );
   }
 
   void onEdit() {
@@ -79,39 +93,19 @@ class _NoteEditPageState extends State<NoteEditPage> {
               ),
               IcoButton(
                 icon: Icons.delete_rounded,
-                onPressed: () {
-                  showDialog(
-                    context: context,
-                    builder: (BuildContext context) {
-                      return DialogWidget(
-                        title: 'Удалить заметку?',
-                        yesText: 'УДАЛИТЬ',
-                        onPressed: onDelete,
-                      );
-                    },
-                  );
-                },
+                onPressed: onDeleteDialog,
               ),
             ],
           ),
-          Expanded(
-            child: ListView(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              children: [
-                const SizedBox(height: 20),
-                Row(
-                  children: [
-                    _DateText(formatDate(widget.note.id)),
-                    const Spacer(),
-                    _DateText(formatTime(widget.note.id)),
-                  ],
-                ),
-                const SizedBox(height: 20),
-                TitleField(controller: controller1),
-                TxtField(controller: controller2),
-                const SizedBox(height: 60),
-              ],
-            ),
+          CustomListView(
+            children: [
+              const SizedBox(height: 20),
+              DateAndTime(date: widget.note.id),
+              const SizedBox(height: 20),
+              TitleField(controller: controller1),
+              TxtField(controller: controller2),
+              const SizedBox(height: 60),
+            ],
           ),
         ],
       ),
@@ -119,24 +113,6 @@ class _NoteEditPageState extends State<NoteEditPage> {
         icon: Icons.save,
         color: AppColors.accent,
         onPressed: onEdit,
-      ),
-    );
-  }
-}
-
-class _DateText extends StatelessWidget {
-  const _DateText(this.date);
-
-  final String date;
-
-  @override
-  Widget build(BuildContext context) {
-    return Text(
-      date,
-      style: const TextStyle(
-        color: AppColors.date,
-        fontSize: 16,
-        fontWeight: FontWeight.w500,
       ),
     );
   }
