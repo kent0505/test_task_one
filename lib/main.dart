@@ -30,10 +30,12 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        theme: theme,
         locale: const Locale('ru', 'RU'),
+        theme: theme,
         routerConfig: routerConfig,
       ),
     );
   }
 }
+
+// тестировал только на андроид
